@@ -13,6 +13,7 @@ import Login from '../components/Login'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import Post from '../components/Post'
 import Comment from '../components/Comment'
+import Widgets from '../components/Widgets'
 
 function PostPage({ trendingResults, followResults, providers }) {
   const { data: session } = useSession()
@@ -36,9 +37,10 @@ function PostPage({ trendingResults, followResults, providers }) {
         query(
           collection(db, 'posts', id, 'comments'),
           orderBy('timestamp', 'desc')
-        )
+        ),
+        (snapshot) => setComments(snapshot.docs)
       ),
-    (snapshot) => setComments(snapshot.docs())
+    [db, id]
   )
 
   if (!session) return <Login providers={providers} />
@@ -78,6 +80,10 @@ function PostPage({ trendingResults, followResults, providers }) {
             </div>
           )}
         </div>
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        />
         {/* Widget */}
 
         {isOpen && <Modal />}
