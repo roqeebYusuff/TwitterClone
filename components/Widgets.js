@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Trending from './Trending'
 
 function Widgets({ trendingResults, followResults }) {
-  console.log(trendingResults)
   return (
     <div className="ml-8 hidden space-y-5 py-1 lg:inline xl:w-[450px]">
       <div className="sticky top-0 z-50 w-11/12 bg-black py-1.5 xl:w-9/12">
